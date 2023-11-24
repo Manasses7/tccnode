@@ -2,12 +2,12 @@ const express = require('express');
 const app = express();
 const sqlite3 = require('sqlite3')
 
-app.use(express.static('./html/'));
+app.use(express.static('./public'));
 
 app.use(require('body-parser').urlencoded({extended:true}));
 
 app.get ('/login', (req, res)=>{
-    res.redirect('index.html')
+    res.redirect('./index.html')
 })
 
 app.post('/cadastro', (req, res)=>{ 
@@ -18,6 +18,7 @@ app.post('/cadastro', (req, res)=>{
         loginemail: req.body.emaillogin,
         loginpassword: req.body.passwordlogin
     }
+
     console.log(cadastro);
 
     const db = new sqlite3.Database('./banco_de_dados/login.db', sqlite3.OPEN_READWRITE);
@@ -30,7 +31,7 @@ app.post('/cadastro', (req, res)=>{
         cadastro.loginemail, 
         cadastro.loginpassword], (erro) => {
             if(erro) {
-                res.json({msg: 'erro'})
+                res.json({msg: 'conta existente!'})
             } else {
                 res.redirect('/login')
             }
