@@ -91,7 +91,7 @@ nav{
 button{
     background-color: transparent;
 }
-.button-signup, #send{
+#button-signup, #send{
     border-radius: 60px 60px 60px 60px;
     padding: 2px;
 }
